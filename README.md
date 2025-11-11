@@ -70,10 +70,10 @@ This project bridges the gap between raw data and decision-making through SQL-ba
    - Importing CSV data using T-SQL `BULK INSERT`
    - Data cleaning and constraint validation
    - Writing analysis queries to generate business insights:
-   1. Aggregations
-   2. Joins across schemas
-   3. Subqueries and CTEs
-   4. Window functions for ranking
+   	1. Aggregations
+   	2. Joins across schemas
+   	3. Subqueries and CTEs
+   	4. Window functions for ranking
    - Identified top-performing products, stores, and employees  
 
 3. **Power BI Dashboard Creation**  
@@ -94,7 +94,7 @@ This project bridges the gap between raw data and decision-making through SQL-ba
 ---
 
 ## 📈 Dashboard  
-![Bike Store Dashboard](dashboard/Bike%20Store%20Sales%20Insight%20Dashboard.PNG)  
+![Bike Store Dashboard](images/Bike%20Store%20Sales%20Insight%20Dashboard.PNG)  
 
 **Dashboard Features:**  
 - Monthly Revenue Trend (2016–2018)  
@@ -108,26 +108,26 @@ This project bridges the gap between raw data and decision-making through SQL-ba
 
 ## 🗂️ Folder Structure  
 
+```
+
 bike-store-sql-powerbi-analysis/
 │
 ├── data/ # Contains all CSV dataset files
 │
-├── SQL Script/
-│ ├── import_data.sql # For database creation, schema design, and bulk insert
-│ └── analysis_queries.sql # Contains all SQL queries for analysis
+├── SQL Script/ # SQL scripts for database setup and analysis
+│ ├── import_data.sql # Creates database, schema & performs bulk inserts
+│ └── analysis_queries.sql # Contains all SQL analysis queries
 │
-├── query result/ # Contains all SQL query result exports
+├── Query Result/ # Stores all SQL query result exports
 │
-├── dashboard/
-│ └── bike_store_analysis.pbix # Power BI dashboard file
+├── dashboard/ # Power BI dashboard files
+│ └── bike_store_analysis.pbix
 │
-├── images/
-│ └── Bike Store Sales Insight Dashboard.png # Dashboard screenshot
+├── images/ # Power BI dashboard screenshots
+│ └── Bike Store Sales Insight Dashboard.PNG
 │
-└── README.md # Project documentation (this file)
-
-
-
+└── README.md # Project documentation
+```
 ---
 
 ## 🧭 How to Run This Project  
@@ -156,25 +156,31 @@ bike-store-sql-powerbi-analysis/
 
 ## 🏁 Result & Conclusion
 
-###The analysis and dashboard provide a comprehensive view of sales across stores, products, and employees.
+The analysis and dashboard provide a comprehensive view of sales across stores, products, and employees.
 Management can now:
 
-	- Track sales performance by city and store
+	 Track sales performance by city and store
 
-	- Identify seasonal revenue trends
+	 Identify seasonal revenue trends
 
-	- Recognize top-performing employees
+	 Recognize top-performing employees
 
-	- Optimize product stocking and marketing
+	 Optimize product stocking and marketing
 
 ### This project demonstrates how combining SQL and Power BI can turn raw data into strategic business insights.
 
 ## 👤 Author
 
-Name: Aayush Agarwal
+**Aayush Agarwal**
+
+
 Role: Data Analyst | SQL & Power BI 
-LinkedIn: [Your LinkedIn URL here]
-GitHub: https://github.com/<your-username>
+
+
+LinkedIn: [https://www.linkedin.com/in/aayush-agarwal-17b1a814b/]
+
+
+Email: aayushagarwal0705@gmail.com
 
 
 
