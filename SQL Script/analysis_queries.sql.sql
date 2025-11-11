@@ -1,30 +1,12 @@
---What is the total sales revenue, total orders, and average order value across all stores?
+Q1 -What is the total sales revenue, total orders, and average order value across all stores?
 --Gives overall business health summary.
-
-WITH order_table AS (
-SELECT o.order_id, SUM(oi.quantity*oi.list_price*(1-oi.discount)) AS total_order
-FROM sales.orders AS o
-JOIN sales.order_items AS oi ON 
-o.order_id = oi.order_id
-GROUP BY o.order_id)
-SELECT ROUND(SUM(total_order),2) AS total_revenue, COUNT(*) AS total_orders,
-ROUND(AVG(total_order),2) AS average_order_value
-FROM order_table;
-
---OR
-
-SELECT ROUND(SUM(quantity*list_price*(1-discount)),2) AS total_revenue,
-COUNT(DISTINCT order_id) AS total_order,
-ROUND(AVG(quantity*list_price*(1-discount)),2) AS average_order_value
-FROM sales.order_items;
 
 SELECT ROUND(SUM(quantity*list_price*(1-discount)),2) AS total_revenue,
 COUNT(DISTINCT order_id) AS total_order,
 ROUND(SUM(quantity*list_price*(1-discount))/ COUNT (DISTINCT order_id),2) AS average_order_value
 FROM sales.order_items;
 
-
---Which top 5 cities generated the highest sales revenue?
+Q2 -Which top 5 cities generated the highest sales revenue?
 --Reveals strongest regional markets.
 
 SELECT TOP 5 c.city, ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS revenue
@@ -36,7 +18,7 @@ o.customer_id = c.customer_id
 GROUP BY c.city
 ORDER BY revenue DESC
 
---Which product categories sell the most units and contribute the highest revenue?
+Q3 -Which product categories sell the most units and contribute the highest revenue?
 --Identifies high-performing product segments.
 
 SELECT c.category_name ,SUM(oi.quantity) AS unit_sold ,
@@ -50,22 +32,7 @@ GROUP BY c.category_name
 ORDER BY revenue DESC
 
 
---Who are the top 10 customers by lifetime purchase value?
---Shows loyal / high-value customers.
-
-SELECT TOP 10 c.customer_id,CONCAT(c.first_name,' ',c.last_name) AS full_name,
-ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS purchase_value,
-COUNT(DISTINCT(o.order_id)) AS order_count
-FROM sales.customers AS C
-JOIN sales.orders AS o ON
-c.customer_id = o.customer_id
-JOIN sales.order_items AS oi ON
-o.order_id = oi.order_id
-GROUP BY c.customer_id,CONCAT(c.first_name,' ',c.last_name)
-ORDER BY purchase_value DESC
-
-
---Which store has the highest sales per customer ratio?
+Q4 -Which store has the highest sales per customer ratio?
 --Identifies most efficient store performance.
 
 SELECT TOP 1 s.store_name,
@@ -83,7 +50,7 @@ GROUP BY s.store_name
 ORDER BY revenur_per_customer DESC
 
 
---What are the most profitable brands based on revenue and quantity sold?
+Q5 -What are the most profitable brands based on revenue and quantity sold?
 --Highlights which brand partnerships are most valuable.
 
 SELECT  b.brand_name,SUM(oi.quantity) AS unit_sold ,
@@ -96,28 +63,9 @@ p.brand_id = b.brand_id
 GROUP BY b.brand_name
 ORDER BY revenue DESC
 
---Which months are the peak and lowest sales periods?
+Q6 -Which months are the peak and lowest sales periods?
 --Useful for planning marketing & stock inventory.
 
-
---TOP 3 sales month
-
-SELECT TOP 3 FORMAT(o.order_date,'yyyy-MMM') AS sales_month,
-ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS revenue
-FROM sales.order_items AS oi 
-JOIN sales.orders AS o ON
-o.order_id = oi.order_id
-GROUP BY FORMAT(o.order_date,'yyyy-MMM')
-ORDER BY revenue DESC
-
---Top 3 lowest sales month 
-SELECT TOP 3 FORMAT(o.order_date,'yyyy-MMM') AS sales_month,
-ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS revenue
-FROM sales.order_items AS oi 
-JOIN sales.orders AS o ON
-o.order_id = oi.order_id
-GROUP BY FORMAT(o.order_date,'yyyy-MMM')
-ORDER BY revenue 
 
 WITH monthly_sales AS (SELECT FORMAT(o.order_date,'yyyy-MMM') AS sales_month,
 ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS revenue,
@@ -138,7 +86,7 @@ WHERE revenue_desc = 1 OR revenue_asc = 1
 
 
 
---What is the month-over-month revenue growth rate for the last two years?
+Q7 -What is the month-over-month revenue growth rate for the last two years?
 --Reveals business growth trend.
 
 WITH last_two_year_revenue AS (
@@ -165,7 +113,7 @@ FROM last_two_year_revenue
 
 
 
---Which products are often out of stock (low quantity in stock vs. sales volume)?
+Q8 -Which products are often out of stock (low quantity in stock vs. sales volume)?
 --Highlights potential supply chain gaps.
 
 WITH sold AS (
@@ -205,7 +153,7 @@ ELSE 3
 END
 
 
---Which cities have the highest customer order frequency?
+Q9 -Which cities have the highest customer order frequency?
 --Helps decide where to open new stores or run ads.
 
 SELECT TOP 5 c.city,COUNT(o.order_id) AS total_order, COUNT(DISTINCT(o.customer_id)) AS unique_customer,
@@ -218,7 +166,7 @@ ORDER BY Total_order DESC
 
 
 
---How do discounts impact total revenue 
+Q10 -How do discounts impact total revenue 
 --Understands discounting strategy works.
 
 SELECT (oi.discount*100) AS [discount%],
@@ -230,7 +178,7 @@ FROM sales.order_items AS oi
 GROUP BY (oi.discount*100)
 
 
---What is the repeat purchase rate (customers with >1 order)?
+Q11 -What is the repeat purchase rate (customers with >1 order)?
 --Measures customer loyalty & satisfaction.
 
 WITH customer_order AS (SELECT DISTINCT(o.customer_id),COUNT(o.order_id) AS no_of_orders
@@ -249,7 +197,7 @@ FROM RPR
 
 
 
---Which product combinations are most frequently bought together?
+Q12 -Which product combinations are most frequently bought together?
 --Supports cross-selling or combo offers.
 
 SELECT p1.product_name,p2.product_name,COUNT(*) AS times_bought_together
@@ -264,7 +212,7 @@ ON oi2.product_id = p2.product_id
 GROUP BY p1.product_name,p2.product_name
 ORDER BY times_bought_together DESC
 
---Which products have declining sales trends year-over-year?
+Q13 -Which products have declining sales trends year-over-year?
 --Identifies products to discontinue or relaunch
 
 WITH yoy_revenue AS (SELECT p.product_id, p.product_name,
@@ -288,7 +236,7 @@ SELECT * FROM yoy_trend
 WHERE [yoy_trend%] <0
 
 
---What is the seasonal category demand pattern (by month)?
+Q14 -What is the seasonal category demand pattern (by month)?
 --Forecasts inventory and staffing needs.
 
 WITH mom_pattern AS (SELECT c.category_id,c.category_name,
@@ -307,7 +255,22 @@ GROUP BY c.category_id,c.category_name,DATENAME(MONTH,o.order_date)
 SELECT *,
 ROW_NUMBER() OVER(PARTITION BY category_id ORDER BY total_quantity_sold DESC) AS rank_base_on_quantity_month
 FROM mom_pattern
+ORDER BY rank_base_on_quantity_month
 
+
+Q15 -Who are the top 10 customers by lifetime purchase value?
+--Shows loyal / high-value customers.
+
+SELECT TOP 10 c.customer_id,CONCAT(c.first_name,' ',c.last_name) AS full_name,
+ROUND(SUM(oi.quantity*oi.list_price*(1-oi.discount)),2) AS purchase_value,
+COUNT(DISTINCT(o.order_id)) AS order_count
+FROM sales.customers AS C
+JOIN sales.orders AS o ON
+c.customer_id = o.customer_id
+JOIN sales.order_items AS oi ON
+o.order_id = oi.order_id
+GROUP BY c.customer_id,CONCAT(c.first_name,' ',c.last_name)
+ORDER BY purchase_value DESC
 
 
 				

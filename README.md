@@ -1,96 +1,180 @@
-# Bike Store SQL Analysis Project
+# 🚴‍♂️ Bike Store Sales Insight Dashboard  
 
-A SQL-based analysis of retail performance using the Bike Store sample relational database from Kaggle.
-
----
-
-## Overview
-This project focuses on analyzing business performance and customer behavior across multiple bike retail stores. The objective is to demonstrate strong SQL skills through end-to-end database setup, data import, and analytical querying with Microsoft SQL Server.
+### *This project focuses on analyzing business performance and customer behavior across multiple bike retail stores*  
 
 ---
 
-## Problem Statement
-Retail managers require insights into product demand, store performance, sales trends, and inventory levels. The goal is to answer key business questions such as:
-- Which stores generate the highest revenue?
-- Which products and brands drive profitability?
-- What is the sales trend over time?
-- Where does inventory require optimization?
-- Who are the most valuable customers?
+## 📑 Table of Contents  
+1. [Overview](#overview)  
+2. [Problem Statement](#problem-statement)  
+3. [Dataset](#dataset)  
+4. [Tools & Technologies](#tools--technologies)  
+5. [Methods & Approach](#methods--approach)  
+6. [Key Insights](#key-insights)  
+7. [Dashboard](#dashboard)  
+8. [Folder Structure](#folder-structure)  
+9. [How to Run This Project](#how-to-run-this-project)  
+10. [Result & Conclusion](#result--conclusion)  
+11. [Author](#author)  
 
 ---
 
-## Dataset
-**Source:** Kaggle  
-Bike Store Sample Database  
-Link: https://www.kaggle.com/datasets/dillonmyrick/bike-store-sample-database
-
-**Data includes:**
-- Products and categories
-- Brands
-- Customers and stores
-- Staff and orders details
-- Inventory (stock levels)
-
-**File formats:** CSV  
-**Database used:** Microsoft SQL Server
+## 🧩 Overview  
+This project analyzes the sales performance of a multi-store bike retailer using **MS SQL Server** and **Power BI**.  
+It helps management monitor KPIs like revenue, order trends, and employee sales performance — providing a complete view of business growth and opportunities.  
 
 ---
 
-## Tools and Technologies
-| Category | Tools |
-|---------|------|
-| Database | Microsoft SQL Server (T-SQL) |
-| Query Tool | SQL Server Management Studio (SSMS) |
-| Version Control | Git, GitHub |
-| Optional Data Visualization | Excel or Power BI (if results exported) |
+## 💼 Problem Statement  
+The bike store operates across multiple locations and product categories but lacked a unified, data-driven view of performance.  
+Key questions included:  
+- Which stores and cities generate the most revenue?  
+- What product categories contribute the most to sales?  
+- Who are the top-performing employees?  
+- How do sales vary across time periods?  
+
+This project bridges the gap between raw data and decision-making through SQL-based analysis and an interactive Power BI dashboard.  
 
 ---
 
-## Methods
-The following approach was used:
-1. Database creation and schema setup in SQL Server
-2. Importing CSV data using T-SQL `BULK INSERT`
-3. Data cleaning and constraint validation
-4. Writing analysis queries to generate business insights:
-   - Aggregations
-   - Joins across schemas
-   - Subqueries and CTEs
-   - Window functions for ranking
-5. Exporting and documenting insights for stakeholders
+## 📊 Dataset  
+
+### 🔗 Sources  
+- **Kaggle Dataset:** [Bike Store Relational Database](https://www.kaggle.com/datasets/dillonmyrick/bike-store-sample-database)  
+- **Local Dataset:** Stored in the `data/` folder of this repository  
+
+### 📁 Dataset Includes  
+- **Orders:** Transaction details, revenue, and order dates  
+- **Products:** Product and category information  
+- **Customers:** Customer demographics and locations  
+- **Employees:** Sales representative details  
+- **Stores:** Branch and region data  
 
 ---
 
-## Key Insights (examples)
-- Store performance varies significantly; online demand peaks in certain regions.
-- Top-selling products belong to premium brand categories.
-- A small percentage of high-value customers drive majority sales.
-- Inventory imbalance identified in low-turnover items.
-- Sales performance increases seasonally across bikes and accessories.
-
-*(Your actual results may adjust once queries are finalized and exported.)*
+## 🧰 Tools & Technologies  
+- 🧮 **MS SQL Server** – Data extraction, transformation, and analysis  
+- 📊 **Power BI** – Data visualization and interactive dashboard creation  
+- 🧠 **Kaggle Dataset** – Public relational database used for this project  
+- 💻 **GitHub** – Version control and project documentation  
 
 ---
 
-## Output (Queries / Results / Dashboard)
-- `sql/analysis_queries.sql` contains all business questions and SQL queries with comments.
-- Optional visual outputs included in `results/` folder such as:
-  - Top 10 revenue products table
-  - Monthly sales trend analysis
-  - Store performance comparison
+## ⚙️ Methods & Approach  
+1. **Data Cleaning & Preparation**  
+   - Imported relational tables into SQL Server  
+   - Cleaned and standardized data (dates, product names, store codes)  
 
-If you build a Power BI dashboard later, screenshots can also be added here.
+2. **SQL Analysis**  
+   - Database creation and schema setup in SQL Server
+   - Importing CSV data using T-SQL `BULK INSERT`
+   - Data cleaning and constraint validation
+   - Writing analysis queries to generate business insights:
+   1. Aggregations
+   2. Joins across schemas
+   3. Subqueries and CTEs
+   4. Window functions for ranking
+   - Identified top-performing products, stores, and employees  
+
+3. **Power BI Dashboard Creation**  
+   - Built KPIs: Total Revenue, Total Orders, Average Order Value  
+   - Designed visuals: Line charts, bar charts, and donut charts  
+   - Added time filters (Last 12 months, Last 24 months, Overall)  
 
 ---
 
-## How to Run This Project
+## 🔑 Key Insights  
+- 💰 **Total Revenue:** \$7.69M from **1,615 orders**  
+- 🛒 **Average Order Value (AOV):** \$4.76K per order  
+- 🏙️ **Top Cities by Revenue:** Mount Vernon, Ballston Spa, San Angelo  
+- 🚲 **Top Product Category:** Cruiser Bicycles (2,063 units sold)  
+- 🏬 **Top Store:** Baldwin Bikes (67.83% of total revenue)  
+- 👩‍💼 **Top Employees:** Marcel Boyer & Venita Daniel (\$2.6M each)  
 
-### Prerequisites
-- Windows system with Microsoft SQL Server or SQL Server Express installed
-- SQL Server Management Studio (SSMS)
-- Git installed locally
+---
 
-### Steps
-1. Clone the repository:
+## 📈 Dashboard  
+![Bike Store Dashboard](dashboard/Bike%20Store%20Sales%20Insight%20Dashboard.PNG)  
+
+**Dashboard Features:**  
+- Monthly Revenue Trend (2016–2018)  
+- KPIs for Revenue, Orders, and AOV  
+- Top 5 Cities by Revenue  
+- Top Categories by Unit Sold  
+- Store Revenue Contribution  
+- Employee Performance by Sales  
+
+---
+
+## 🗂️ Folder Structure  
+
+bike-store-sql-powerbi-analysis/
+│
+├── data/ # Contains all CSV dataset files
+│
+├── SQL Script/
+│ ├── import_data.sql # For database creation, schema design, and bulk insert
+│ └── analysis_queries.sql # Contains all SQL queries for analysis
+│
+├── query result/ # Contains all SQL query result exports
+│
+├── dashboard/
+│ └── bike_store_analysis.pbix # Power BI dashboard file
+│
+├── images/
+│ └── Bike Store Sales Insight Dashboard.png # Dashboard screenshot
+│
+└── README.md # Project documentation (this file)
+
+
+
+---
+
+## 🧭 How to Run This Project  
+
+1. **Clone the Repository**
    ```bash
-   git clone https://github.com/<your-username>/bike-store-sql-analysis.git
-   cd bike-store-sql-analysis
+   git clone https://github.com/Aayush-Agarwal7/bike-store-analysis-sql-powerbi.git
+
+2. Set Up the Database
+
+	- Open import_data.sql in MS SQL Server
+
+	- Run the script to create the database, schema, and bulk insert data from the /data folder
+
+3. Run Analysis Queries
+
+	- Execute analysis_queries.sql to generate summary tables and insights
+
+4. Open the Power BI Dashboard
+
+	- Open bike_store_analysis.pbix in Power BI
+
+	- Connect to your local SQL Server if needed
+
+	- Refresh the dataset to update visuals
+
+## 🏁 Result & Conclusion
+
+###The analysis and dashboard provide a comprehensive view of sales across stores, products, and employees.
+Management can now:
+
+	- Track sales performance by city and store
+
+	- Identify seasonal revenue trends
+
+	- Recognize top-performing employees
+
+	- Optimize product stocking and marketing
+
+### This project demonstrates how combining SQL and Power BI can turn raw data into strategic business insights.
+
+## 👤 Author
+
+Name: Aayush Agarwal
+Role: Data Analyst | SQL & Power BI 
+LinkedIn: [Your LinkedIn URL here]
+GitHub: https://github.com/<your-username>
+
+
+
